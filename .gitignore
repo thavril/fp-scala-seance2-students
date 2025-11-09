@@ -1,0 +1,23 @@
+# sbt specific
+target/
+project/target/
+project/project/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.bsp/
+
+# Scala
+*.class
+*.log
+
+# Mac
+.DS_Store
+
+
+
+
+
+
