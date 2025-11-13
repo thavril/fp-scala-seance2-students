@@ -40,12 +40,11 @@ object Exercices {
 
   /**
    * 1.3 - Obtenir le premier élément d'une liste (head)
-   * Retournez None si la liste est vide
+   * Vous pouvez supposer que la liste n'est jamais vide
    * 
-   * Exemple : premierElement(List(1, 2, 3)) => Some(1)
-   *           premierElement(List()) => None
+   * Exemple : premierElement(List(1, 2, 3)) => 1
    */
-  def premierElement(liste: List[Int]): Option[Int] = ???
+  def premierElement(liste: List[Int]): Int = ???
 
   /**
    * 1.4 - Vérifier si une liste contient un élément
@@ -110,9 +109,10 @@ object Exercices {
   def dupliquer(liste: List[Int]): List[Int] = ???
 
   /**
-   * 3.3 - Générer des paires (for-comprehension)
+   * 3.3 - Générer des paires (flatMap)
    * Générez toutes les paires (i, j) où i vient de la première liste
    * et j de la deuxième liste
+   * Utilisez flatMap et map
    * 
    * Exemple : genererPaires(List(1, 2), List("a", "b")) 
    *           => List((1, "a"), (1, "b"), (2, "a"), (2, "b"))
@@ -156,15 +156,15 @@ object Exercices {
   def concatener(liste: List[String], separateur: String): String = ???
 
   /**
-   * 4.4 - Trouver le maximum (reduceOption)
-   * Retournez None si la liste est vide
+   * 4.4 - Trouver le maximum (reduce)
+   * Utilisez reduce avec une fonction qui compare deux éléments
+   * Vous pouvez supposer que la liste n'est jamais vide
    * 
-   * Exemple : maximum(List(3, 1, 4, 1, 5)) => Some(5)
-   *           maximum(List()) => None
-   *
+   * Exemple : maximum(List(3, 1, 4, 1, 5)) => 5
+   * 
    * /!\ liste.max interdit
    */
-  def maximum(liste: List[Int]): Option[Int] = ???
+  def maximum(liste: List[Int]): Int = ???
 
 
   // ============================================================================
@@ -267,12 +267,12 @@ object Exercices {
    * 5.5.5 - Trouver le point le plus proche de l'origine
    * Dans une liste de points, trouvez celui le plus proche de l'origine
    * Utilisez la fonction distanceOrigine et minBy
-   * Retournez None si la liste est vide
+   * Vous pouvez supposer que la liste n'est jamais vide
    * 
    * Exemple : pointLePlusProche(List(Point(1,1), Point(5,5), Point(2,2)))
-   *           => Some(Point(1, 1))
+   *           => Point(1, 1)
    */
-  def pointLePlusProche(points: List[Point]): Option[Point] = ???
+  def pointLePlusProche(points: List[Point]): Point = ???
 
 
   // ============================================================================
@@ -408,10 +408,11 @@ object Exercices {
    * - l'année du livre le plus ancien
    * - l'année du livre le plus récent
    * 
-   * Retournez None si la liste est vide
+   * Vous pouvez supposer que la liste n'est jamais vide
+   * Utilisez les fonctions map, distinct, minBy, maxBy
    * 
    * Exemple : statistiquesBibliotheque(livres) 
-   *           => Some(StatsBibliotheque(50, 8, 1949, 2023))
+   *           => StatsBibliotheque(50, 8, 1949, 2023)
    */
   case class StatsBibliotheque(
     totalLivres: Int,
@@ -420,35 +421,15 @@ object Exercices {
     anneePlusRecent: Int
   )
 
-  def statistiquesBibliotheque(livres: List[Livre]): Option[StatsBibliotheque] = ???
+  def statistiquesBibliotheque(livres: List[Livre]): StatsBibliotheque = ???
 
 
   // ============================================================================
-  // BONUS : Exercices Avancés (3 exercices optionnels)
+  // BONUS : Exercices Avancés (2 exercices optionnels)
   // ============================================================================
 
   /**
-   * BONUS 1 - Recherche de livres (composition de fonctions)
-   * Cherchez des livres selon plusieurs critères :
-   * - catégorie optionnelle
-   * - auteur optionnel
-   * - année minimale optionnelle
-   * 
-   * Si un critère est None, il n'est pas appliqué
-   * Appliquez les filtres successivement avec filter
-   * 
-   * Exemple : rechercherLivres(livres, Some("Fiction"), None, Some(2000))
-   *           => livres de fiction publiés après 2000
-   */
-  def rechercherLivres(
-    livres: List[Livre],
-    categorieOpt: Option[String],
-    auteurOpt: Option[String],
-    anneeMinOpt: Option[Int]
-  ): List[Livre] = ???
-
-  /**
-   * BONUS 2 - Recommandations
+   * BONUS 1 - Recommandations
    * Pour un livre donné (par titre), recommandez d'autres livres :
    * - du même auteur OU de la même catégorie
    * - mais pas le livre lui-même
@@ -462,16 +443,16 @@ object Exercices {
   def recommander(livres: List[Livre], titreLivre: String): List[Livre] = ???
 
   /**
-   * BONUS 3 - Emprunteur le plus actif
+   * BONUS 2 - Emprunteur le plus actif
    * Trouvez l'emprunteur qui a emprunté le plus de livres
-   * Groupez par emprunteur, comptez, puis trouvez le maximum
+   * Groupez par emprunteur, comptez, puis trouvez le maximum avec maxBy
    * Retournez un tuple (nom, nombre de livres)
-   * Retournez None si la liste est vide
+   * Vous pouvez supposer que la liste n'est jamais vide
    * 
    * Exemple : emprunteurLePlusActif(emprunts) 
-   *           => Some(("Alice", 5))
+   *           => ("Alice", 5)
    */
-  def emprunteurLePlusActif(emprunts: List[Emprunt]): Option[(String, Int)] = ???
+  def emprunteurLePlusActif(emprunts: List[Emprunt]): (String, Int) = ???
 }
 
 
