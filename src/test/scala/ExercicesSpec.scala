@@ -21,10 +21,10 @@ class ExercicesSpec extends FunSuite {
     assertEquals(tailleListe(List(42)), 1)
   }
 
-  test("1.3 - premierElement: retourne le premier élément ou None") {
-    assertEquals(premierElement(List(1, 2, 3)), Some(1))
-    assertEquals(premierElement(List()), None)
-    assertEquals(premierElement(List(42)), Some(42))
+  test("1.3 - premierElement: retourne le premier élément") {
+    assertEquals(premierElement(List(1, 2, 3)), 1)
+    assertEquals(premierElement(List(42)), 42)
+    assertEquals(premierElement(List(10, 20, 30)), 10)
   }
 
   test("1.4 - contient: vérifie si un élément est présent") {
@@ -113,9 +113,9 @@ class ExercicesSpec extends FunSuite {
   }
 
   test("4.4 - maximum: trouve le maximum") {
-    assertEquals(maximum(List(3, 1, 4, 1, 5)), Some(5))
-    assertEquals(maximum(List()), None)
-    assertEquals(maximum(List(42)), Some(42))
+    assertEquals(maximum(List(3, 1, 4, 1, 5)), 5)
+    assertEquals(maximum(List(42)), 42)
+    assertEquals(maximum(List(10, 20, 5)), 20)
   }
 
 
@@ -180,8 +180,8 @@ class ExercicesSpec extends FunSuite {
 
   test("5.5.5 - pointLePlusProche: trouve le point le plus proche de l'origine") {
     val points = List(Point(5, 5), Point(1, 1), Point(3, 4))
-    assertEquals(pointLePlusProche(points), Some(Point(1, 1)))
-    assertEquals(pointLePlusProche(List()), None)
+    assertEquals(pointLePlusProche(points), Point(1, 1))
+    assertEquals(pointLePlusProche(List(Point(3, 4))), Point(3, 4))
   }
 
 
@@ -287,16 +287,10 @@ class ExercicesSpec extends FunSuite {
 
   test("6.11 - statistiquesBibliotheque: calcule les statistiques") {
     val stats = statistiquesBibliotheque(livres)
-    assert(stats.isDefined)
-    val Some(s) = stats
-    assertEquals(s.totalLivres, 8)
-    assertEquals(s.nombreCategories, 5)
-    assertEquals(s.anneePlusAncien, 1937)
-    assertEquals(s.anneePlusRecent, 2015)
-  }
-
-  test("6.11 - statistiquesBibliotheque: retourne None pour liste vide") {
-    assertEquals(statistiquesBibliotheque(List()), None)
+    assertEquals(stats.totalLivres, 8)
+    assertEquals(stats.nombreCategories, 5)
+    assertEquals(stats.anneePlusAncien, 1937)
+    assertEquals(stats.anneePlusRecent, 2015)
   }
 
 
@@ -304,27 +298,7 @@ class ExercicesSpec extends FunSuite {
   // BONUS : Exercices Avancés
   // ============================================================================
 
-  test("BONUS 1 - rechercherLivres: recherche avec plusieurs critères") {
-    // Recherche par catégorie uniquement
-    val fiction = rechercherLivres(livres, Some("Fiction"), None, None)
-    assertEquals(fiction.size, 2)
-
-    // Recherche par auteur uniquement
-    val harari = rechercherLivres(livres, None, Some("Yuval Noah Harari"), None)
-    assertEquals(harari.size, 2)
-
-    // Recherche par année uniquement
-    val recents = rechercherLivres(livres, None, None, Some(2000))
-    assertEquals(recents.size, 3)
-
-    // Recherche combinée
-    val fictionRecente = rechercherLivres(livres, Some("Histoire"), None, Some(2010))
-    assertEquals(fictionRecente.size, 2)
-    assert(fictionRecente.exists(_.titre == "Sapiens"))
-    assert(fictionRecente.exists(_.titre == "Homo Deus"))
-  }
-
-  test("BONUS 2 - recommander: recommande des livres similaires") {
+  test("BONUS 1 - recommander: recommande des livres similaires") {
     val reco = recommander(livres, "1984")
     // Devrait inclure Animal Farm (même auteur) et être trié par année
     assert(reco.exists(_.titre == "Animal Farm"))
@@ -332,13 +306,9 @@ class ExercicesSpec extends FunSuite {
     assert(!reco.exists(_.titre == "1984"))
   }
 
-  test("BONUS 3 - emprunteurLePlusActif: trouve l'emprunteur le plus actif") {
+  test("BONUS 2 - emprunteurLePlusActif: trouve l'emprunteur le plus actif") {
     val plusActif = emprunteurLePlusActif(emprunts)
-    assertEquals(plusActif, Some(("Alice", 3)))
-  }
-
-  test("BONUS 3 - emprunteurLePlusActif: retourne None pour liste vide") {
-    assertEquals(emprunteurLePlusActif(List()), None)
+    assertEquals(plusActif, ("Alice", 3))
   }
 }
 
